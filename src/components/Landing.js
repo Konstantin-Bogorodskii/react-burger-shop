@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import restorants from '../../sample-restaurants';
+import restorants from '../sample-restaurants';
 
 class Landing extends Component {
   state = {
