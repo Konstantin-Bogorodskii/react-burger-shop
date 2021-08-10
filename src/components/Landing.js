@@ -23,7 +23,9 @@ class Landing extends Component {
   };
 
   goToRestaurant = () => {
-    console.log('go');
+    const { url } = this.state;
+    // Переход на другую страницу
+    this.props.history.push(`/restaurant/${url}`);
   };
 
   render() {
