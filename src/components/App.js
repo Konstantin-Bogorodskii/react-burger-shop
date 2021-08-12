@@ -4,6 +4,7 @@ import Order from './Order';
 import MenuAdmin from './MenuAdmin';
 import sampleBurgers from '../sample-burgers';
 import Burger from './Burger';
+import base from '../base';
 
 class App extends Component {
   state = {
@@ -11,11 +12,52 @@ class App extends Component {
     order: {},
   };
 
+  componentDidMount() {
+    const { params } = this.props.match;
+
+    const localStorageRef = localStorage.getItem(params.restaurantId);
+    if (localStorageRef) {
+      this.setState({ order: JSON.parse(localStorageRef) });
+    }
+
+    this.ref = base.syncState(`${params.restaurantId}/burgers`, {
+      context: this,
+      state: 'burgers',
+    });
+  }
+
+  componentDidUpdate() {
+    const { params } = this.props.match;
+    localStorage.setItem(params.restaurantId, JSON.stringify(this.state.order));
+  }
+
+  componentWillUnmount() {
+    base.removeBinding(this.ref);
+  }
+
   addBurger = burger => {
-    // Сделали копию объекта
+    // Сделали копию объекта state
     const burgers = { ...this.state.burgers };
     burgers[`burger${Date.now()}`] = burger;
     this.setState({ burgers });
+  };
+
+  updatedBurger = (key, updatedBurger) => {
+    const burgers = { ...this.state.burgers };
+    burgers[key] = updatedBurger;
+    this.setState({ burgers });
+  };
+
+  deleteBurger = key => {
+    const burgers = { ...this.state.burgers };
+    burgers[key] = null;
+    this.setState({ burgers });
+  };
+
+  deleteFromOrder = key => {
+    const order = { ...this.state.order };
+    delete order[key];
+    this.setState({ order });
   };
 
   sampleBurgers = () => {
@@ -47,8 +89,14 @@ class App extends Component {
             })}
           </ul>
         </div>
-        <Order {...this.state} />
-        <MenuAdmin addBurger={this.addBurger} sampleBurgers={this.sampleBurgers} />
+        <Order {...this.state} deleteFromOrder={this.deleteFromOrder} />
+        <MenuAdmin
+          addBurger={this.addBurger}
+          sampleBurgers={this.sampleBurgers}
+          burgers={this.state.burgers}
+          updatedBurger={this.updatedBurger}
+          deleteBurger={this.deleteBurger}
+        />
       </div>
     );
   }
