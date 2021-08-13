@@ -1,12 +1,29 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class EditBurgerForm extends Component {
+  static propTypes = {
+    burger: PropTypes.shape({
+      image: PropTypes.string,
+      name: PropTypes.string,
+      price: PropTypes.number,
+      desc: PropTypes.string,
+      status: PropTypes.string,
+    }),
+    index: PropTypes.string,
+    deleteBurger: PropTypes.func,
+    updatedBurger: PropTypes.func,
+  };
+
   handleChange = e => {
     const updatedBurger = {
       // Получаем все значения объекта бургер
       ...this.props.burger,
       // Динамически меняем значения инпута на новые
-      [e.currentTarget.name]: e.currentTarget.value,
+      [e.currentTarget.name]:
+        e.currentTarget.name === 'price'
+          ? parseFloat(e.currentTarget.value) || 0
+          : e.currentTarget.value,
     };
     this.props.updatedBurger(this.props.id, updatedBurger);
   };

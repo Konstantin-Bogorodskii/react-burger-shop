@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Shipment extends Component {
+  static propTypes = {
+    total: PropTypes.number,
+  };
+
   render() {
     const { total } = this.props;
     const shipping = total > 0 && total < 500 ? 250 : 99;
