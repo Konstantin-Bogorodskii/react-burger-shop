@@ -15,6 +15,14 @@ class MenuAdmin extends Component {
   render() {
     return (
       <div className="menu-admin">
+        <div className="login-header">
+          <div className="avatar">
+            <img src="/images/avatar.png" alt="avatar" />
+          </div>
+          <button onClick={this.props.handleLogout} className="buttonLogout">
+            Выйти
+          </button>
+        </div>
         <h2>Управление Меню</h2>
         {Object.keys(this.props.burgers).map(key => {
           return (
