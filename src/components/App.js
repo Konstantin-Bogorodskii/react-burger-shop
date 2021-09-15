@@ -85,34 +85,32 @@ class App extends Component {
 
   render() {
     return (
-      <SignIn>
-        <div className="burger-paradise">
-          <div className="menu">
-            <Header title="Very Hot Burger" />
-            <ul className="burgers">
-              {Object.keys(this.state.burgers).map(key => {
-                return (
-                  <Burger
-                    key={key}
-                    index={key}
-                    details={this.state.burgers[key]}
-                    addToOrder={this.addToOrder}
-                  />
-                );
-              })}
-            </ul>
-          </div>
-          <Order {...this.state} deleteFromOrder={this.deleteFromOrder} />
-          <MenuAdmin
-            addBurger={this.addBurger}
-            sampleBurgers={this.sampleBurgers}
-            burgers={this.state.burgers}
-            updatedBurger={this.updatedBurger}
-            deleteBurger={this.deleteBurger}
-            handleLogout={this.handleLogout}
-          />
+      <div className="burger-paradise">
+        <div className="menu">
+          <Header title="Very Hot Burger" />
+          <ul className="burgers">
+            {Object.keys(this.state.burgers).map(key => {
+              return (
+                <Burger
+                  key={key}
+                  index={key}
+                  details={this.state.burgers[key]}
+                  addToOrder={this.addToOrder}
+                />
+              );
+            })}
+          </ul>
         </div>
-      </SignIn>
+        <Order {...this.state} deleteFromOrder={this.deleteFromOrder} />
+        <MenuAdmin
+          addBurger={this.addBurger}
+          sampleBurgers={this.sampleBurgers}
+          burgers={this.state.burgers}
+          updatedBurger={this.updatedBurger}
+          deleteBurger={this.deleteBurger}
+          handleLogout={this.handleLogout}
+        />
+      </div>
     );
   }
 }

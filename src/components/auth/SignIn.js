@@ -1,36 +1,36 @@
-import React, { Component } from 'react';
-import { firebaseApp } from '../../base';
-import Login from './Login';
-import firebase from 'firebase';
+// import React, { Component } from 'react';
+// import { firebaseApp } from '../../base';
+// import Login from './Login';
+// import firebase from 'firebase';
 
-class SignIn extends Component {
-  state = {
-    user: '',
-  };
+// class SignIn extends Component {
+//   state = {
+//     user: '',
+//   };
 
-  componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.authHandler({ user });
-      }
-    });
-  }
+//   componentDidMount() {
+//     firebase.auth().onAuthStateChanged(user => {
+//       if (user) {
+//         this.authHandler({ user });
+//       }
+//     });
+//   }
 
-  authHandler = async authData => {
-    const { email } = authData.user;
-    this.setState({ user: email });
-  };
+//   authHandler = async authData => {
+//     const { email } = authData.user;
+//     this.setState({ user: email });
+//   };
 
-  authenticate = () => {
-    const authProvider = new firebase.auth['GithubAuthProvider']();
-    firebaseApp.auth().signInWithPopup(authProvider).then(this.authHandler);
-  };
+//   authenticate = () => {
+//     const authProvider = new firebase.auth['GithubAuthProvider']();
+//     firebaseApp.auth().signInWithPopup(authProvider).then(this.authHandler);
+//   };
 
-  render() {
-    if (!this.state.user) {
-      return <Login authenticate={this.authenticate} />;
-    }
-    return this.props.children;
-  }
-}
-export default SignIn;
+//   render() {
+//     if (!this.state.user) {
+//       return <Login authenticate={this.authenticate} />;
+//     }
+//     return this.props.children;
+//   }
+// }
+// export default SignIn;

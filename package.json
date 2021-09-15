@@ -1,5 +1,4 @@
 {
-  "homepage": "http://kbogorodsky.github.io/react-burger-shop",
   "name": "hot-burgers",
   "version": "0.1.0",
   "private": true,
@@ -16,8 +15,6 @@
     "stylus": "^0.54.7"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "watch": "concurrently --names \"webpack, stylus\" --prefix name \"npm run start\" \"npm run styles:watch\"",
     "build": "react-scripts build",

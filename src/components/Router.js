@@ -8,11 +8,8 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="https://kbogorodsky.github.io/react-burger-shop/" component={Landing} />
-        <Route
-          path="https://kbogorodsky.github.io/react-burger-shop/restaurant/:restaurantId"
-          component={App}
-        />
+        <Route exact path="/" component={Landing} />
+        <Route path="/restaurant/:restaurantId" component={App} />
         <Route component={NotFound} />
       </Switch>
     </BrowserRouter>
