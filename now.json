@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "hot-burgers",
+  "name": "react-burger-shop",
   "builds": [
     {
       "src": "package.json",
